@@ -23,21 +23,21 @@
 
 </head>
 <body>
-	<table id="table-1">
-		<thead>
-			<tr>
-				<th>A</th>
-				<th>B</th>
-				<th>C</th>
+<%@ include file="../../../header.jsp"%>
+<div class="panel panel-default">
+  <div class="panel-body">
+	<table class="table table-condensed">
+	  	<tbody>
+	  	<c:forEach items="${listaUser}" var="user">
+			<tr style="">
+				<td>${user.name}</td>
+				<td><button type="submit" class="btn btn-info" style="width:90px;" >Seguir</button>
+				</td>				
 			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>a</td>
-				<td>b</td>
-				<td>c</td>
-			</tr>
+		</c:forEach>
 		</tbody>
 	</table>
+	</div>
+</div>
 </body>
 </html>

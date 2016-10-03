@@ -16,7 +16,7 @@
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 
-<link href="css/style.css" rel="stylesheet">
+<link href="../../css/style.css" rel="stylesheet">
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -35,7 +35,7 @@
     <label class="sr-only" for="exampleInputPassword3">Password</label>
     <input type="password" name="user.password" class="form-control" placeholder="Senha">
   </div>
-  <button type="submit" class="btn btn-info" style="width:90px ">Entrar</button>
+  <button type="submit" class="btn btn-info" style="width:90px">Entrar</button>
 </form>
 <hr size="1" style="border: 1px solid #DBDBDB;" />
 

@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import tuit.dao.UserDao;
+import tuit.model.Seguir;
 import tuit.model.Twit;
 import tuit.model.User;
 import tuit.model.UserSession;
@@ -35,6 +36,14 @@ public class IndexController {
 		result.redirectTo(IndexController.class).index();
 		
 	}
+	
+	@Path("/seguir")
+	public void Seguir(Seguir seguir){
+		UserDao dao = new UserDao();
+		dao.seguir(seguir);
+		
+	}
+	
 	@Path("/publicar")
 	public void  publicar(Twit twit){
 		UserDao dao = new UserDao();
@@ -55,6 +64,13 @@ public class IndexController {
 			listaake.get(i).setDataformat(a); // atualiza o valor da data formatada em uma variavel nao armazenada
 		}
 		return listaake;
+	}
+	
+	private List<User> listaUser(){
+		UserDao dao = new UserDao();
+		List<User> listauser = dao.listaUser();
+		return listauser;
+		
 	}
 
 	@Path("/validarUser")
@@ -80,9 +96,13 @@ public class IndexController {
 	
 	@Path("home")
 	public void home() {
+		result.include("publicacao", listaTwit());
 		
-		result.include("publicacao", listaTwit());	
-		
+	}
+	@Path("list")
+	public void list(){
+		result.include("listaUser", listaUser());	
+
 	}
 
 }

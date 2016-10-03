@@ -16,6 +16,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.Property;
 
+import tuit.model.Seguir;
 import tuit.model.Twit;
 import tuit.model.User;
 
@@ -43,6 +44,15 @@ public class UserDao {
 		session.getTransaction().commit();
 		session.close();
 		
+	}
+	
+	public void seguir(Seguir seguir){
+		Session session = UserDao.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(seguir);
+		session.getTransaction().commit();
+		session.close();
+
 	}
 	
 	public void publicar(Twit twit){
@@ -79,8 +89,12 @@ public class UserDao {
 	public List<User> listaUser() throws HibernateException{
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(User.class);
-
-		return null;
+		
+		List<User> user = (List<User>) criteria.list();
+		
+		session.close();
+		
+		return user;
 	
 	}
 	

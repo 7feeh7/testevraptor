@@ -34,25 +34,24 @@ function limite_textarea(valor){
 <body>
 <p class="bg-primary">${message}</p>
 <%@ include file="../../../header.jsp"%>
-<div id="div_Container">
-<h2>Olá, ${userSession.user.name}</h2>
-<div id="conteudo">
-<form action="<c:url value="/publicar"/>" method="POST" class="form">
-	<textarea id="textarea" name="twit.twit" placeholder="Oque você esta pensando?" onKeyDown="limite_textarea(this.value)" maxlength="140"></textarea></br>
-	<input class="btnS" type="submit" style="right:60px;" value="Twiitar">
-	<span id="cont" style="text-align:right;">140</span>
-</form>
-<table class="table table-condensed">
-  	<tbody>
-  	<c:forEach items="${publicacao}" var="twit">
-		<tr style="">
-			<td>${twit.twit}</td>
-			<td style="color:rgb(136, 153, 166);">${twit.dataformat}</td>
-		</tr>
-	</c:forEach>
-	</tbody>
-</table>
-</div> <!-- fim da dive conteudo -->
-</div> <!-- fim da div container -->
+<div class="panel panel-default">
+  <div class="panel-body">
+	 <form action="<c:url value="/publicar"/>" method="POST" class="form">
+		<textarea id="textarea" name="twit.twit" placeholder="Oque você esta pensando?" onKeyDown="limite_textarea(this.value)" maxlength="140"></textarea></br>
+		<input class="btnS" type="submit" style="right:60px;" value="Twiitar">
+		<span id="cont" style="text-align:right;">140</span>
+	</form>
+	<table class="table table-condensed">
+	  	<tbody>
+	  	<c:forEach items="${publicacao}" var="twit">
+			<tr style="">
+				<td>${twit.twit}</td>
+				<td style="color:rgb(136, 153, 166);">${twit.dataformat}</td>
+			</tr>
+		</c:forEach>
+		</tbody>
+	</table>
+	</div>	
+</div>
 </body>
 </html>

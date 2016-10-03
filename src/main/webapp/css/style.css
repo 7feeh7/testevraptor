@@ -5,6 +5,16 @@ body{
 	width:360px;
 	border-radius:4px;
 }
+.panel{
+    width:600px;
+    height:auto;
+    background:#fff;
+    position:absolute;
+	left:25%;
+	top:9%;
+	color:#909090;
+}
+
 .panel-footer{
 	position: absolute;
 	bottom: 0;
@@ -40,7 +50,8 @@ body{
 
 }
 .navbar{
-	background:red;
+	background:#fff;
+	color:#909090;
 }
 #div_Container {
     margin: 0 auto;
