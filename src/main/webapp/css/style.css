@@ -1,18 +1,61 @@
 @CHARSET "UTF-8";
-body{
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Editando botões */
 .btn{
-	width:360px;
-	border-radius:4px;
+     width:280px;
+    border-radius:4px;
+    background: #9400D3;
+    color:white;
+}
+.btn:hover{
+    border:1px solid #9932CC;
+}
+ .btnS{
+ 	background:#9400D3;
+ 	width:120px;
+ 	height:30px;
+ 	border:none;
+ 	border-radius:4px;
+ 	color:white;
+}
+.WelcomeB{
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    left:10%;top:25%;
+    border-radius: 4px;
+}
+.glyphicon{
+	font-size:19px;
+	color:#9400D3;
+}
+.glyphicon:hover{
+	color:#9400D3;
+	text-decoration: none;
+}
+
+.stream-item-footer {
+	/* classe de alinhamento dos icons de publicação */
 }
 .panel{
     width:600px;
     height:auto;
-    background:#fff;
     position:absolute;
 	left:25%;
 	top:9%;
 	color:#909090;
+	border:transparent;
 }
 
 .panel-footer{
@@ -22,12 +65,18 @@ body{
 	text-align: center;
 }
 .titulo{
-	text-align:center;
+	 text-align: justify;
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
     -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;    
+    -webkit-margin-end: 0px;     
 }
+.flex-module{
+	background-color:#fff;
+	width:258px;
+	height:204px;
+	border: 1px solid #DBDBDB;
+	}
 .bg-primary{
 	text-align:center;
 	background:#1DA1F2;
@@ -44,11 +93,9 @@ body{
     background-color: #F8F8F8;
     }
 .form-inline{
-    padding: 1px 15px;
+    padding: 2px 15px;
+    margin-top:20px;
  }
-.form-horizontal{
-
-}
 .navbar{
 	background:#fff;
 	color:#909090;
@@ -58,33 +105,13 @@ body{
     width: 950px;
 }
 
-#conteudo{
-    float: left;
-    width: 100%;
-    background: #fff;
-    height: auto;
-    position:center;
-    margin-top: 22px;
-    text-align: justify;
-    background:#fff;
-    margin-bottom:50px; 
-    border:solid 1px #DBDBDB;
-}
 .panel-footer{
-	background:#fff;
+	background:#9400D3;
+	color:white;
 }
 #textarea {
 		right:10px;
         border: 1px #ddd solid;
         width: 400px;
         height: 120px;
-    }
- .btnS{
- 	background:#1DA1F2;
- 	width:120px;
- 	height:30px;
- 	border:none;
- 	border-radius:4px;
- 	color:white;
- }
- 
+} 

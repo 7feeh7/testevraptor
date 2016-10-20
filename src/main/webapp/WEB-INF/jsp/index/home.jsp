@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,23 +34,46 @@ function limite_textarea(valor){
 <p class="bg-primary">${message}</p>
 <%@ include file="../../../header.jsp"%>
 <div class="panel panel-default">
-  <div class="panel-body">
-	 <form action="<c:url value="/publicar"/>" method="POST" class="form">
+  <div class="panel-body" >
+  
+  <div class="row">
+	<div class="thumbnail">
+ 	<div class="caption">
+    <form action="<c:url value="/publicar"/>" method="POST" class="form" >
 		<textarea id="textarea" name="twit.twit" placeholder="Oque você esta pensando?" onKeyDown="limite_textarea(this.value)" maxlength="140"></textarea></br>
-		<input class="btnS" type="submit" style="right:60px;" value="Twiitar">
+		<input class="btnS" type="submit" style="right:60px;" value="Publicar">
 		<span id="cont" style="text-align:right;">140</span>
 	</form>
-	<table class="table table-condensed">
-	  	<tbody>
-	  	<c:forEach items="${publicacao}" var="twit">
-			<tr style="">
-				<td>${twit.twit}</td>
-				<td style="color:rgb(136, 153, 166);">${twit.dataformat}</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
-	</div>	
+    </div>
+
+  </div>
 </div>
+	 
+<div class="row">
+<c:forEach items="${teste}" var="twit">
+<div class="thumbnail">
+ 	<div class="caption">
+    <h4>${twit.name}</h4>
+    <p style="color:rgb(136, 153, 166);text-align:right;">${twit.dataformat}</p>
+    <p>${twit.twit}</p>
+    <div class="stream-item-footer">
+    <hr size="1" style="border:1px solid rgb(225, 232, 237);border-radius: 4px;" />
+    <p><a href="#" class="glyphicon glyphicon-thumbs-up" role="button"></a> 
+       <a href="#" class="glyphicon glyphicon-comment" style="left: 5%;" role="button"></a></p>           
+    
+    </div>
+    </div>
+  </div>
+</c:forEach>
+</div>
+
+</div><!-- fim da classe body -->	
+</div><!-- fim da classe default -->
+<div class="container" style="background:#fff;width:258px;height:relative;right:38%;
+    border:1px solid rgb(225, 232, 237);border-radius: 4px; margin-bottom: 10px;top:52px;
+    position: relative;">
+	<marquee>Eu sou um teste</marquee>    
+</div><!-- fim da classe container -->
+
 </body>
 </html>

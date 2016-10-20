@@ -26,12 +26,8 @@
 <div class="container">
 <div class="navbar-header">
 <a class="navbar-brand" href="#">
-	<img alt="Brand" src="css/icon-tw.png" style="width:50px;height:50px;position:absolute;top:77%;margin-left:-45px;margin-top:-40px;">
+	<img alt="Brand" src="css/icon.png" style="width:40px;height:40px;position:absolute;top:90%;margin-left:-45px;margin-top:-40px;">
 </a>
-<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
-	<span class="sr-only">Toggle navigation</span>
-</button> 
-<a class="navbar-brand" href="#">Twitter</a>
 </div>
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <ul class="nav navbar-nav">
@@ -39,8 +35,9 @@
 	">Inicio</a></li>
 	<li><a href="${linkTo[IndexController].list}" icon="">Usuarios</a></li>
 	 <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Olá, ${userSession.user.name}<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${userSession.user.name}<span class="caret"></span></a>
           <ul class="dropdown-menu">
+          	<li><a href="">Configurações</a></li>
             <li><a href="${linkTo[IndexController].logout}">Sair</a></li>
           </ul>
         </li>

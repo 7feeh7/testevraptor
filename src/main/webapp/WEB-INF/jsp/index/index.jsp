@@ -16,7 +16,7 @@
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 
-<link href="../../css/style.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -24,8 +24,10 @@
 
 </head>
 <body>
-<p class="bg-primary">${message}</p>
-
+<div class="alert alert-danger" style="height:50px;width:370px;position:absolute;right:10px;margin-top:-15px;display:none;">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Danger!</strong> ${warningerro}.
+</div>
 <form action="<c:url value="/validarUser"/>" method="POST" class="form-inline">
   <div class="form-group">
     <label class="sr-only" for="exampleInputEmail3">Email address</label>
@@ -35,38 +37,50 @@
     <label class="sr-only" for="exampleInputPassword3">Password</label>
     <input type="password" name="user.password" class="form-control" placeholder="Senha">
   </div>
-  <button type="submit" class="btn btn-info" style="width:90px">Entrar</button>
+  <button type="submit" class="btn" style="width:90px;border: 1px solid #fff;">Entrar</button>
 </form>
 <hr size="1" style="border: 1px solid #DBDBDB;" />
 
+<div class="WelcomeB">
+   <dl>
+    <dt>Compartilhe oque gosta</dt>
+    <dd>compartilhe com todos seus amigos fotos, videos e musicas.</dd>
+  </dl>
+  <dl>
+    <dt>Conheça novas pessoas</dt>
+    <dd>Adicione novas pessoas com os mesmos interesses e gostos.</dd>
+  </dl>
+  <dl>
+    <dt>Faça tudo isso com segurança</dt>
+    <dd>garantimos que todos seus dados e mensagens sejam protegidos etc.</dd>
+  </dl>
+</div>
 
 <form action="<c:url value="/salvar"/>" class="form-horizontal" method="POST">
-  <h2 class="titulo">Cadastre-se</h2>
 <div class="row">
-<div class="col-lg-4 col-lg-offset-4">
+<div class="col-lg-4 col-lg-offset-7">
+<h2 class="titulo">Cadastre-se</h2>
 <div class="form-group">
-<div class="col-sm-10">	   
+<div class="col-sm-8">	   
 		<input type="text" name="user.name" value="${user.name}" class="form-control" placeholder="Digite seu Nome">
 </div>
 	</div>
 	<div class="form-group">
-	<div class="col-sm-10">
+	<div class="col-sm-8">
 		<input type="email" name="user.email" class="form-control" placeholder="Digite seu E-mail">
 	</div>
 	</div>
 	<div class="form-group">
-	<div class="col-sm-10">
+	<div class="col-sm-8">
 		<input type="password" name="user.password" class="form-control" placeholder="Digite sua Senha">
 	</div>
 	</div>
 	<div class="col-sm-">
-	<button type="submit" class="btn btn-info">Cadastre-se</button>
+	<button type="submit" class="btn" style=".btn:hover{border: 1px solid #222222;}">Cadastre-se</button>
 	</div>
 </div>
 </div>
 </form>
 
-
-	<%@ include file="../../../footer.jsp"%>
 </body>
 </html>

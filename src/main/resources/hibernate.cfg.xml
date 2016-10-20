@@ -15,6 +15,7 @@
    <property name="hibernate.hbm2ddl.auto">update</property>
  
   <mapping class="tuit.model.User"/>
+  <mapping class="tuit.model.Seguir"/>
   <mapping class="tuit.model.Twit"/>
    
  </session-factory>

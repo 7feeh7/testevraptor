@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.Result;
 import tuit.dao.UserDao;
 import tuit.model.Seguir;
 import tuit.model.Twit;
+import tuit.model.TwitterVO;
 import tuit.model.User;
 import tuit.model.UserSession;
 
@@ -38,10 +39,14 @@ public class IndexController {
 	}
 	
 	@Path("/seguir")
-	public void Seguir(Seguir seguir){
+	public void Seguir(Long id){
 		UserDao dao = new UserDao();
+		Seguir seguir = new Seguir();
+		seguir.setId_seguindo(id);
+		Long id_user = session.getId();
+		seguir.setId_user(id_user);
 		dao.seguir(seguir);
-		
+		result.redirectTo(IndexController.class).home();				
 	}
 	
 	@Path("/publicar")
@@ -69,7 +74,20 @@ public class IndexController {
 	private List<User> listaUser(){
 		UserDao dao = new UserDao();
 		List<User> listauser = dao.listaUser();
-		return listauser;
+		return listauser;		
+	}
+	
+	private List<TwitterVO> listaVO(){
+		UserDao dao = new UserDao();
+		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Long id_user = session.getId();
+		List<TwitterVO> listavo = dao.listaVO(id_user);
+		for (int i = 0; i<listavo.size(); i++) {
+			TwitterVO t = listavo.get(i); // pega o twit da posisao i
+			String a = dataFormatada.format(t.getData().getTime()); //converte a data no formato predefinido
+			listavo.get(i).setDataformat(a); // atualiza o valor da data formatada em uma variavel nao armazenada
+		}
+		return listavo;
 		
 	}
 
@@ -78,14 +96,13 @@ public class IndexController {
 		UserDao dao = new UserDao();
 		User usuario = dao.validarUser(user.getEmail(),user.getPassword());
 		if(usuario == null){
-			result.include("messagen","Usuario ou Senha invalida!");
+			result.redirectTo(IndexController.class).index();	
+			result.include("warningerro","Usuario ou Senha invalida!");
 			
 		}else{
 			session.login(usuario);
 			result.redirectTo(IndexController.class).home();
 		}
-	
-	
 	}
 	
 	
@@ -97,6 +114,8 @@ public class IndexController {
 	@Path("home")
 	public void home() {
 		result.include("publicacao", listaTwit());
+		result.include("listaUser", listaUser());
+		result.include("teste",listaVO());
 		
 	}
 	@Path("list")

@@ -6,6 +6,7 @@
 <head>
 <title>bolsas - v1</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="<c:url value='/css/style.css' />"/>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -17,9 +18,14 @@
 	crossorigin="anonymous"></script>
 
 <link href="css/style.css" rel="stylesheet">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 
 </head>
 <body>
-<p class="bg-danger">${messagen}</p>
+
+
 </body>
 </html>

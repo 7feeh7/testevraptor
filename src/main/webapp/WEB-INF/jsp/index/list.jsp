@@ -25,14 +25,15 @@
 <body>
 <%@ include file="../../../header.jsp"%>
 <div class="panel panel-default">
-  <div class="panel-body">
+  <div class="panel-body" style="border:1px solid rgb(225, 232, 237);border-radius: 4px;">
+
 	<table class="table table-condensed">
+	  <h3 style="size: 14px;">Talvez voçê conheça</h3>
 	  	<tbody>
 	  	<c:forEach items="${listaUser}" var="user">
 			<tr style="">
 				<td>${user.name}</td>
-				<td><button type="submit" class="btn btn-info" style="width:90px;" >Seguir</button>
-				</td>				
+				<td><a href="seguir?id=${user.id}">Seguir</a></td>				
 			</tr>
 		</c:forEach>
 		</tbody>
