@@ -109,9 +109,9 @@ body {
 	background:#9400D3;
 	color:white;
 }
-#textarea {
-		right:10px;
-        border: 1px #ddd solid;
-        width: 400px;
-        height: 120px;
+.textarea{
+	 width: 400px;
+     height: 120px;
+	 right:10px;
+	 border: 1px #ddd solid;
 } 

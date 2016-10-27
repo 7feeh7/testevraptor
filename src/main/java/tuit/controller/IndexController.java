@@ -77,6 +77,14 @@ public class IndexController {
 		return listauser;		
 	}
 	
+	private List<User> listaSeguindo(){
+		UserDao dao = new UserDao();
+		Long id_user = session.getId();
+		List<User> seguindo = dao.listaSeguindo(id_user);
+		return seguindo;
+		
+	}
+	
 	private List<TwitterVO> listaVO(){
 		UserDao dao = new UserDao();
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -115,6 +123,9 @@ public class IndexController {
 	public void home() {
 		result.include("publicacao", listaTwit());
 		result.include("listaUser", listaUser());
+		
+		result.include("listaSeguindo", listaSeguindo());
+		
 		result.include("teste",listaVO());
 		
 	}

@@ -38,6 +38,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${userSession.user.name}<span class="caret"></span></a>
           <ul class="dropdown-menu">
           	<li><a href="">Configurações</a></li>
+          	 <li role="separator" class="divider"></li>
             <li><a href="${linkTo[IndexController].logout}">Sair</a></li>
           </ul>
         </li>
