@@ -6,8 +6,10 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -119,7 +121,7 @@ public class UserDao {
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(User.class);
 		
-		String sql = "SELECT * FROM Seguir WHERE id_user = :var";
+		String sql = "SELECT id,id_user,id_seguindo FROM Seguir WHERE id_user = :var";
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(Seguir.class);
 		query.setParameter("var", id_user);
@@ -130,7 +132,7 @@ public class UserDao {
 		
 		while (i.hasNext()) {
 			Seguir o = (Seguir) i.next();
-			ids.add(o.getId_seguindo());
+			ids.add(o.getId_seguindo().getId());
 		}
 		
 		List<User> seguindo = (List<User>) criteria
@@ -140,9 +142,10 @@ public class UserDao {
 		return seguindo;
 		
 	}
-	@SuppressWarnings("unchecked")
-	public List<TwitterVO>listaVO(Long id_user) throws HibernateException{
+
+	public List<TwitterVO> listaVO(Long id_user) throws HibernateException{
 	List<TwitterVO> listaVO = new ArrayList<>();
+	
 	List<User> listaSeguindo = listaSeguindo(id_user);
 	List<User> listaUsuarios = listaUser();
 	List<Twit> listaTodos = listaTodos(id_user); 
@@ -177,7 +180,7 @@ public class UserDao {
 			}
 		}
 	}
-	
+
 	return listaVO;			
 }
 	

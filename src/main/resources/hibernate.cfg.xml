@@ -9,10 +9,9 @@
   <property name="hibernate.connection.password">postgres</property>
   <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/twitterDB</property>
   
-   <property name="hibernate.show_sql">true</property>
-   <property name="hibernate.format_sql">false</property>
-   
-   <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">false</property>
+  <property name="hibernate.hbm2ddl.auto">update</property>
  
   <mapping class="tuit.model.User"/>
   <mapping class="tuit.model.Seguir"/>

@@ -1,5 +1,6 @@
 package tuit.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /*
@@ -18,7 +19,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "twit")
-public class Twit {
+public class Twit implements Serializable{
 
 	@Id
 	@SequenceGenerator(sequenceName = "seq_twit", name = "seq_twit", allocationSize = 1)

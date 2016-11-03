@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,8 +20,8 @@ public class Seguir implements Serializable{
 	private Long id;
 	@Column
 	private Long id_user;
-	@Column
-	private Long id_seguindo;
+	@OneToOne
+	private User id_seguindo;
 
 	public Long getId() {
 		return id;
@@ -38,11 +39,11 @@ public class Seguir implements Serializable{
 		this.id_user = id_user;
 	}
 
-	public Long getId_seguindo() {
+	public User getId_seguindo() {
 		return id_seguindo;
 	}
 
-	public void setId_seguindo(Long id_seguindo) {
+	public void setId_seguindo(User id_seguindo) {
 		this.id_seguindo = id_seguindo;
 	}
 

@@ -74,21 +74,25 @@ function limite_textarea(valor){
 </div><!-- fim da classe body -->	
 </div><!-- fim da classe default -->
 
-<div class="container" style="background:#fff;width:290px;height:relative;left:74%;
-    border:1px solid rgb(225, 232, 237);border-radius: 4px; margin-bottom: 10px;top:75px;
-    position: absolute;">
-	<table class="table table-condensed">
-	 <h4 style="text-align:justify;margin-top:10px;">Seguindo</h4>
-	  	<tbody>
-	  	<c:forEach items="${listaSeguindo}" var="Seguir">
-			<tr style="">
-				<td>${Seguir.id}</td>
-				<td>${Seguir.name}</td>				
-			</tr>
-		</c:forEach>
+<div class="container fixed-top"
+	style="background: #fff; width: 290px; height: relative; left: 74%; border: 1px solid rgb(225, 232, 237); border-radius: 4px; margin-bottom: 10px; top: 75px; position: absolute;">
+	<h4 style="text-align: justify; margin-top: 10px;">Seguindo</h4>
+	<input type="text" class="form-control input-search" alt="lista-clientes" placeholder="Buscar nesta lista" />
+	<table class="table table-bordered">
+		<tbody style="padding-left: 10%; padding-top: 23%;">
+			<c:forEach items="${listaSeguindo}" var="Seguir">
+			 <tr>
+			    <th>ID</th>
+			    <th>NAME</th>
+			  </tr>
+				<tr>
+					<td>${Seguir.id}</td>
+					<td>${Seguir.name}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
-	</table>     
-</div><!-- fim da classe container -->
+	</table>
+</div> <!-- fim da classe container -->
 
 </body>
 </html>

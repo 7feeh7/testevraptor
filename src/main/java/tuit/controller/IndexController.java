@@ -42,7 +42,7 @@ public class IndexController {
 	public void Seguir(Long id){
 		UserDao dao = new UserDao();
 		Seguir seguir = new Seguir();
-		seguir.setId_seguindo(id);
+		seguir.getId_seguindo().setId(id);
 		Long id_user = session.getId();
 		seguir.setId_user(id_user);
 		dao.seguir(seguir);
@@ -89,7 +89,7 @@ public class IndexController {
 		UserDao dao = new UserDao();
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Long id_user = session.getId();
-		List<TwitterVO> listavo = dao.listaVO(id_user);
+		List<TwitterVO> listavo = (List<TwitterVO>) dao.listaVO(id_user);
 		for (int i = 0; i<listavo.size(); i++) {
 			TwitterVO t = listavo.get(i); // pega o twit da posisao i
 			String a = dataFormatada.format(t.getData().getTime()); //converte a data no formato predefinido
@@ -123,9 +123,7 @@ public class IndexController {
 	public void home() {
 		result.include("publicacao", listaTwit());
 		result.include("listaUser", listaUser());
-		
 		result.include("listaSeguindo", listaSeguindo());
-		
 		result.include("teste",listaVO());
 		
 	}
