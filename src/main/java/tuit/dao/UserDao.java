@@ -25,6 +25,7 @@ import tuit.model.Seguir;
 import tuit.model.Twit;
 import tuit.model.TwitterVO;
 import tuit.model.User;
+import tuit.model.UserSession;
 
 public class UserDao {
 	public static final SessionFactory session = buildSession();
@@ -51,13 +52,20 @@ public class UserDao {
 		session.save(user);
 		session.getTransaction().commit();
 		session.close();
-		
 	}
 	
 	public void seguir(Seguir seguir){
 		Session session = UserDao.getSessionFactory().openSession();
 		session.beginTransaction();
 		session.save(seguir);
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	public void updateUser(User user){
+		Session session = UserDao.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.update(user);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -98,8 +106,6 @@ public class UserDao {
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(Twit.class);
 		List<Twit> twit = new ArrayList<>();
-		
-		
 		return null;
 		
 	}
@@ -132,7 +138,7 @@ public class UserDao {
 		
 		while (i.hasNext()) {
 			Seguir o = (Seguir) i.next();
-			ids.add(o.getId_seguindo().getId());
+			ids.add(o.getId_seguindo());
 		}
 		
 		List<User> seguindo = (List<User>) criteria

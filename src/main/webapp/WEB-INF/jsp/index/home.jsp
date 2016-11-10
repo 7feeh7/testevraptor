@@ -40,11 +40,8 @@ function limite_textarea(valor){
 	<div class="thumbnail">
  	<div class="caption">
     <form action="<c:url value="/publicar"/>" method="POST" class="form" >
-		<textarea id="textarea" style="width: 545px;
-     height: 120px;
-	 right:10px;
-	 resize: none;
-	 border: 1px #ddd solid;" name="twit.twit" placeholder="Oque você esta pensando?" onKeyDown="limite_textarea(this.value)" maxlength="140"></textarea></br>
+		<textarea id="textarea" style="width:545px;height:120px;right:10px;resize: none;
+border: 1px #ddd solid;" name="twit.twit" placeholder="Oque você esta pensando?" onKeyDown="limite_textarea(this.value)" maxlength="140"></textarea></br>
 		<input class="btnS" type="submit" style="right:60px;" value="Publicar">
 		<span id="cont" style="text-align:right;">140</span>
 		</form>
@@ -76,22 +73,13 @@ function limite_textarea(valor){
 
 <div class="container fixed-top"
 	style="background: #fff; width: 290px; height: relative; left: 74%; border: 1px solid rgb(225, 232, 237); border-radius: 4px; margin-bottom: 10px; top: 75px; position: absolute;">
-	<h4 style="text-align: justify; margin-top: 10px;">Seguindo</h4>
-	<input type="text" class="form-control input-search" alt="lista-clientes" placeholder="Buscar nesta lista" />
-	<table class="table table-bordered">
-		<tbody style="padding-left: 10%; padding-top: 23%;">
-			<c:forEach items="${listaSeguindo}" var="Seguir">
-			 <tr>
-			    <th>ID</th>
-			    <th>NAME</th>
-			  </tr>
-				<tr>
-					<td>${Seguir.id}</td>
-					<td>${Seguir.name}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<h4 class="text-left">Seguindo</h4>
+	<div class="list-group">
+	<c:forEach items="${listaSeguindo}" var="Seguir">
+	  <button type="button" class="list-group-item">${Seguir.name}</button>
+
+  	</c:forEach>
+	</div>	
 </div> <!-- fim da classe container -->
 
 </body>

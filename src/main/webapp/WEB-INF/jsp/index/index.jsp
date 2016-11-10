@@ -26,7 +26,7 @@
 <body>
 <div class="alert alert-danger" style="height:50px;width:370px;position:absolute;right:10px;margin-top:-15px;display:none;">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Danger!</strong> ${warningerro}.
+   Você não esta conectado.
 </div>
 <form action="<c:url value="/validarUser"/>" method="POST" class="form-inline">
   <div class="form-group">

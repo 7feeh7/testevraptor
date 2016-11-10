@@ -68,6 +68,7 @@ public class TwitterVO implements Serializable{
 				+ ", data=" + data + ", dataformat=" + dataformat + "]";
 	}
 	
+	
 		
 	
 	

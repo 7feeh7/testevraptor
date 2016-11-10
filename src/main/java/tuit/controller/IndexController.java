@@ -28,7 +28,10 @@ public class IndexController {
 	public void index(){
 		result.include("message", "Hello,Word!");
 	}
-	
+	@Path("/alterar")
+	public void alterar(){
+
+	}
 	
 	@Path("/salvar")
 	public void Salvar(User user){
@@ -38,11 +41,21 @@ public class IndexController {
 		
 	}
 	
+	@Path("/update")
+	public void Update(User user){
+		UserDao dao = new UserDao();
+		Long id_user = session.getId();
+		user.setId(id_user);
+		dao.updateUser(user);
+		result.redirectTo(IndexController.class).home();
+		
+	}
+	
 	@Path("/seguir")
 	public void Seguir(Long id){
 		UserDao dao = new UserDao();
 		Seguir seguir = new Seguir();
-		seguir.getId_seguindo().setId(id);
+		seguir.setId_seguindo(id);
 		Long id_user = session.getId();
 		seguir.setId_user(id_user);
 		dao.seguir(seguir);
