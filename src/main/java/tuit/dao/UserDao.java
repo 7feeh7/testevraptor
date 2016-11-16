@@ -46,23 +46,15 @@ public class UserDao {
 		return session;
 	}
 	
-	public void salvar(User user){
+	public void saveUser(User user) {
 		Session session = UserDao.getSessionFactory().openSession();
 		session.beginTransaction();
 		session.save(user);
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	public void seguir(Seguir seguir){
-		Session session = UserDao.getSessionFactory().openSession();
-		session.beginTransaction();
-		session.save(seguir);
-		session.getTransaction().commit();
-		session.close();
-	}
-	
-	public void updateUser(User user){
+
+	public void updateUser(User user) {
 		Session session = UserDao.getSessionFactory().openSession();
 		session.beginTransaction();
 		session.update(user);
@@ -70,8 +62,8 @@ public class UserDao {
 		session.close();
 	}
 	
-	public void publicar(Twit twit){
-		Session session = UserDao.getSessionFactory().openSession();		
+	public void publicar(Twit twit) {
+		Session session = UserDao.getSessionFactory().openSession();
 		session.beginTransaction();
 		twit.setData(Calendar.getInstance());
 		session.save(twit);
@@ -79,18 +71,24 @@ public class UserDao {
 		session.close();
 	}
 	
-	public User validarUser(String email, String password)throws HibernateException{
-	Session session = UserDao.getSessionFactory().openSession();
-	Criteria criteria = session.createCriteria(User.class);
-	User user = (User) criteria
-			.add(Restrictions.ilike("email", email, MatchMode.EXACT))
-			.add(Restrictions.ilike("password", password, MatchMode.EXACT))
-			.uniqueResult();
-	session.close();
-	return user;		
+	public void seguir(Seguir seguir) {
+		Session session = UserDao.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(seguir);
+		session.getTransaction().commit();
+		session.close();
 	}
 	
-	public List<Twit> listaTodos(Long id) throws HibernateException{
+	public User validarUser(String email, String password) throws HibernateException {
+		Session session = UserDao.getSessionFactory().openSession();
+		Criteria criteria = session.createCriteria(User.class);
+		User user = (User) criteria.add(Restrictions.ilike("email", email, MatchMode.EXACT))
+				.add(Restrictions.ilike("password", password, MatchMode.EXACT)).uniqueResult();
+		session.close();
+		return user;
+	}
+	
+	public List<Twit> listaTwit(Long id) throws HibernateException{
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(Twit.class);
 		@SuppressWarnings("unchecked")
@@ -113,14 +111,10 @@ public class UserDao {
 	public List<User> listaUser() throws HibernateException{
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(User.class);
-		
 		@SuppressWarnings("unchecked")
 		List<User> user = (List<User>) criteria.list();
-		
 		session.close();
-		
 		return user;
-	
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<User> listaSeguindo(Long id_user) throws HibernateException{
@@ -150,29 +144,29 @@ public class UserDao {
 	}
 
 	public List<TwitterVO> listaVO(Long id_user) throws HibernateException{
-	List<TwitterVO> listaVO = new ArrayList<>();
-	
-	List<User> listaSeguindo = listaSeguindo(id_user);
-	List<User> listaUsuarios = listaUser();
-	List<Twit> listaTodos = listaTodos(id_user); 
-	
-	for (int i = 0; i < listaSeguindo.size(); i++) {
-		listaTodos.addAll(listaTodos(listaSeguindo.get(i).getId()));
-		
-	}
+		List<TwitterVO> listaVO = new ArrayList<>();
 
-	for (int i = 0; i < listaUsuarios.size(); i++) {
-		for (int j = 0; j < listaTodos.size(); j++) {
-			if (listaUsuarios.get(i).getId()==listaTodos.get(j).getId()) {
-				TwitterVO  t = new TwitterVO();
-				t.setId_user(listaUsuarios.get(i).getId());
-				t.setName(listaUsuarios.get(i).getName());
-				t.setTwit(listaTodos.get(j).getTwit());
-				t.setData(listaTodos.get(j).getData());;
-				listaVO.add(t);		
-			}		
-		}	
-	}
+		List<User> listaSeguindo = listaSeguindo(id_user);
+		List<User> listaUsuarios = listaUser();
+		List<Twit> listaTodos = listaTwit(id_user);
+
+		for (int i = 0; i < listaSeguindo.size(); i++) {
+			listaTodos.addAll(listaTwit(listaSeguindo.get(i).getId()));
+
+		}
+
+		for (int i = 0; i < listaUsuarios.size(); i++) {
+			for (int j = 0; j < listaTodos.size(); j++) {
+				if (listaUsuarios.get(i).getId() == listaTodos.get(j).getId()) {
+					TwitterVO t = new TwitterVO();
+					t.setId_user(listaUsuarios.get(i).getId());
+					t.setName(listaUsuarios.get(i).getName());
+					t.setTwit(listaTodos.get(j).getTwit());
+					t.setData(listaTodos.get(j).getData());
+					listaVO.add(t);
+				}
+			}
+		}
 
 	for (int i = 0; i < listaSeguindo.size(); i++) {
 		for (int j = 0; j < listaTodos.size(); j++) {	
@@ -181,7 +175,7 @@ public class UserDao {
 				t.setId_user(listaSeguindo.get(i).getId());
 				t.setName(listaSeguindo.get(i).getName());
 				t.setTwit(listaTodos.get(j).getTwit());
-				t.setData(listaTodos.get(j).getData());;
+				t.setData(listaTodos.get(j).getData());
 				listaVO.add(t);
 			}
 		}

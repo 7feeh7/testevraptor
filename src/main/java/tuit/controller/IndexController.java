@@ -26,7 +26,7 @@ public class IndexController {
 	
 	@Path("/")
 	public void index(){
-		result.include("message", "Hello,Word!");
+		result.include("", "Você não esta conectado!");
 	}
 	@Path("/alterar")
 	public void alterar(){
@@ -34,40 +34,41 @@ public class IndexController {
 	}
 	
 	@Path("/salvar")
-	public void Salvar(User user){
+	public void Salvar(User user) {
 		UserDao dao = new UserDao();
-		dao.salvar(user);
+		dao.saveUser(user);
+		result.include("message", "Cadastrado com sucesso!");
 		result.redirectTo(IndexController.class).index();
-		
+
 	}
 	
 	@Path("/update")
-	public void Update(User user){
+	public void Update(User user) {
 		UserDao dao = new UserDao();
 		Long id_user = session.getId();
 		user.setId(id_user);
 		dao.updateUser(user);
 		result.redirectTo(IndexController.class).home();
-		
+
 	}
 	
 	@Path("/seguir")
-	public void Seguir(Long id){
+	public void Seguir(Long id) {
 		UserDao dao = new UserDao();
 		Seguir seguir = new Seguir();
 		seguir.setId_seguindo(id);
 		Long id_user = session.getId();
 		seguir.setId_user(id_user);
 		dao.seguir(seguir);
-		result.redirectTo(IndexController.class).home();				
+		result.redirectTo(IndexController.class).home();
 	}
 	
 	@Path("/publicar")
-	public void  publicar(Twit twit){
+	public void publicar(Twit twit) {
 		UserDao dao = new UserDao();
 		twit.setId(session.getId());
 		dao.publicar(twit);
-		result.redirectTo(IndexController.class).home();				
+		result.redirectTo(IndexController.class).home();
 	}
 	
 	private List<Twit> listaTwit(){
@@ -75,7 +76,7 @@ public class IndexController {
 		Twit twit = new Twit();
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Long id = session.getId();
-		List<Twit> listaake = dao.listaTodos(id);
+		List<Twit> listaake = dao.listaTwit(id);
 		for (int i = 0; i<listaake.size(); i++) {
 			Twit t = listaake.get(i); // pega o twit da posisao i
 			String a = dataFormatada.format(t.getData().getTime()); //converte a data no formato predefinido
@@ -84,51 +85,50 @@ public class IndexController {
 		return listaake;
 	}
 	
-	private List<User> listaUser(){
-		UserDao dao = new UserDao();
-		List<User> listauser = dao.listaUser();
-		return listauser;		
-	}
-	
-	private List<User> listaSeguindo(){
-		UserDao dao = new UserDao();
-		Long id_user = session.getId();
-		List<User> seguindo = dao.listaSeguindo(id_user);
-		return seguindo;
-		
-	}
-	
 	private List<TwitterVO> listaVO(){
 		UserDao dao = new UserDao();
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Long id_user = session.getId();
-		List<TwitterVO> listavo = (List<TwitterVO>) dao.listaVO(id_user);
-		for (int i = 0; i<listavo.size(); i++) {
-			TwitterVO t = listavo.get(i); // pega o twit da posisao i
+		List<TwitterVO> listaVo = (List<TwitterVO>) dao.listaVO(id_user);
+		for (int i = 0; i<listaVo.size(); i++) {
+			TwitterVO t = listaVo.get(i); // pega o twit da posisao i
 			String a = dataFormatada.format(t.getData().getTime()); //converte a data no formato predefinido
-			listavo.get(i).setDataformat(a); // atualiza o valor da data formatada em uma variavel nao armazenada
+			listaVo.get(i).setDataformat(a); // atualiza o valor da data formatada em uma variavel nao armazenada
 		}
-		return listavo;
-		
+		return listaVo;
+	}
+	
+	private List<User> listaUser() {
+		UserDao dao = new UserDao();
+		List<User> listauser = dao.listaUser();
+		return listauser;
+	}
+	
+	private List<User> listaSeguindo() {
+		UserDao dao = new UserDao();
+		Long id_user = session.getId();
+		List<User> seguindo = dao.listaSeguindo(id_user);
+		return seguindo;
+
 	}
 
 	@Path("/validarUser")
-	public void validarUser(User user){
+	public void validarUser(User user) {
 		UserDao dao = new UserDao();
-		User usuario = dao.validarUser(user.getEmail(),user.getPassword());
-		if(usuario == null){
-			result.redirectTo(IndexController.class).index();	
-			result.include("warningerro","Usuario ou Senha invalida!");
-			
-		}else{
+		User usuario = dao.validarUser(user.getEmail(), user.getPassword());
+		if (usuario == null) {
+			result.include("warningerro", "Usuario ou Senha invalida!");
+			result.redirectTo(IndexController.class).index();
+
+		} else {
 			session.login(usuario);
 			result.redirectTo(IndexController.class).home();
 		}
 	}
 	
-	
 	@Path("index")
 	public void logout(){
+		result.include("warningedesk", "Você não esta conectado!");
 		result.redirectTo(IndexController.class).index();
 	}
 	
@@ -137,8 +137,8 @@ public class IndexController {
 		result.include("publicacao", listaTwit());
 		result.include("listaUser", listaUser());
 		result.include("listaSeguindo", listaSeguindo());
-		result.include("teste",listaVO());
-		
+		result.include("teste", listaVO());
+
 	}
 	@Path("list")
 	public void list(){

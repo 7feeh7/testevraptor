@@ -24,9 +24,11 @@
 
 </head>
 <body>
-<div class="alert alert-danger" style="height:50px;width:370px;position:absolute;right:10px;margin-top:-15px;display:none;">
+<div class="alert alert-danger" style="height:relative;width:370px;position:absolute;right:10px;margin-top:-15px;background:#fff;border:1px solid rgb(225, 232, 237);color:black;">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-   Você não esta conectado.
+    ${warningerro}
+    ${message}
+    ${warningedesk}
 </div>
 <form action="<c:url value="/validarUser"/>" method="POST" class="form-inline">
   <div class="form-group">
