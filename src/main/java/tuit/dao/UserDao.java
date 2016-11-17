@@ -88,10 +88,10 @@ public class UserDao {
 		return user;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Twit> listaTwit(Long id) throws HibernateException{
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(Twit.class);
-		@SuppressWarnings("unchecked")
 		List<Twit> twit = (List<Twit>) criteria
 				.add(Restrictions.eq("id", id))
 			    .addOrder(Order.desc("data"))
@@ -100,6 +100,7 @@ public class UserDao {
 		return twit;	
 	}
 	
+	@SuppressWarnings("unused")
 	public List<Twit> listaTwitSeguindo(){
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(Twit.class);
@@ -108,15 +109,16 @@ public class UserDao {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<User> listaUser() throws HibernateException{
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(User.class);
-		@SuppressWarnings("unchecked")
 		List<User> user = (List<User>) criteria.list();
 		session.close();
 		return user;
 	}
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	
+	@SuppressWarnings({ "unchecked" })
 	public List<User> listaSeguindo(Long id_user) throws HibernateException{
 		Session session = UserDao.getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(User.class);
@@ -135,57 +137,68 @@ public class UserDao {
 			ids.add(o.getId_seguindo());
 		}
 		
-		List<User> seguindo = (List<User>) criteria
-		.add(Restrictions.in("id", ids.toArray())).list();
+		List<User> seguindo = new ArrayList<>();
+		
+		if (result.size() > 0) {
+			 seguindo = (List<User>) criteria
+			.add(Restrictions.in("id", ids.toArray())).list();
+				
+		}
 		
 		session.close();
 		return seguindo;
 		
 	}
 
-	public List<TwitterVO> listaVO(Long id_user) throws HibernateException{
+	public List<TwitterVO> listaVO(User u) throws HibernateException{
 		List<TwitterVO> listaVO = new ArrayList<>();
 
-		List<User> listaSeguindo = listaSeguindo(id_user);
+		List<User> listaSeguindo = listaSeguindo(u.getId());
 		List<User> listaUsuarios = listaUser();
-		List<Twit> listaTodos = listaTwit(id_user);
+		List<Twit> listaTodos = listaTwit(u.getId());
 
-		for (int i = 0; i < listaSeguindo.size(); i++) {
-			listaTodos.addAll(listaTwit(listaSeguindo.get(i).getId()));
+		if (listaSeguindo.size() > 0) {
+			
+			for (int i = 0; i < listaSeguindo.size(); i++) {
+				listaTodos.addAll(listaTwit(listaSeguindo.get(i).getId()));
 
-		}
-
-		for (int i = 0; i < listaUsuarios.size(); i++) {
-			for (int j = 0; j < listaTodos.size(); j++) {
-				if (listaUsuarios.get(i).getId() == listaTodos.get(j).getId()) {
-					TwitterVO t = new TwitterVO();
-					t.setId_user(listaUsuarios.get(i).getId());
-					t.setName(listaUsuarios.get(i).getName());
-					t.setTwit(listaTodos.get(j).getTwit());
-					t.setData(listaTodos.get(j).getData());
-					listaVO.add(t);
+			}
+			
+			for (int i = 0; i < listaSeguindo.size(); i++) {
+				for (int j = 0; j < listaTodos.size(); j++) {	
+					if(listaSeguindo.get(i).getId() == listaTodos.get(j).getId()) {
+						TwitterVO t = new TwitterVO();
+						t.setId_user(listaSeguindo.get(i).getId());
+						t.setName(listaSeguindo.get(i).getName());
+						t.setTwit(listaTodos.get(j).getTwit());
+						t.setData(listaTodos.get(j).getData());
+						listaVO.add(t);
+					}
 				}
 			}
 		}
 
-	for (int i = 0; i < listaSeguindo.size(); i++) {
-		for (int j = 0; j < listaTodos.size(); j++) {	
-			if(listaSeguindo.get(i).getId()==listaTodos.get(j).getId()) {
-				TwitterVO  t = new TwitterVO();
-				t.setId_user(listaSeguindo.get(i).getId());
-				t.setName(listaSeguindo.get(i).getName());
-				t.setTwit(listaTodos.get(j).getTwit());
-				t.setData(listaTodos.get(j).getData());
-				listaVO.add(t);
-			}
-		}
-	}
 
+			//for (int i = 0; i < listaUsuarios.size(); i++) {
+				for (int j = 0; j < listaTodos.size(); j++) {
+					if (u.getId() == listaTodos.get(j).getId()) {
+						TwitterVO t = new TwitterVO();
+						t.setId_user(u.getId());
+						t.setName(u.getName());
+						t.setTwit(listaTodos.get(j).getTwit());
+						t.setData(listaTodos.get(j).getData());
+						listaVO.add(t);
+					}
+				}
+			//}
+
+
+	
 	return listaVO;			
 }
 	
 	public void logout(User user){
-		
+		session.close();
 	}
 	
 }

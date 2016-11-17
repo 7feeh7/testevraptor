@@ -24,65 +24,74 @@
 
 </head>
 <body>
-<div class="alert alert-danger" style="height:relative;width:370px;position:absolute;right:10px;margin-top:-15px;background:#fff;border:1px solid rgb(225, 232, 237);color:black;">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    ${warningerro}
-    ${message}
-    ${warningedesk}
-</div>
-<form action="<c:url value="/validarUser"/>" method="POST" class="form-inline">
-  <div class="form-group">
-    <label class="sr-only" for="exampleInputEmail3">Email address</label>
-    <input type="email" name="user.email" class="form-control" placeholder="E-mail">
-  </div>
-  <div class="form-group">
-    <label class="sr-only" for="exampleInputPassword3">Password</label>
-    <input type="password" name="user.password" class="form-control" placeholder="Senha">
-  </div>
-  <button type="submit" class="btn" style="width:90px;border: 1px solid #fff;">Entrar</button>
-</form>
-<hr size="1" style="border: 1px solid #DBDBDB;" />
+	<div class="alert alert-danger"
+		style="height: relative; width: 370px; position: absolute; right: 10px; margin-top: -15px; background: #fff; border: 1px solid rgb(225, 232, 237); color: black;">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		${warningerro} ${message} ${warningedesk}
+	</div>
+	<form action="<c:url value="/validarUser"/>" method="POST"
+		class="form-inline">
+		<div class="form-group">
+			<label class="sr-only" for="exampleInputEmail3">Email address</label>
+			<input type="email" name="user.email" class="form-control"
+				placeholder="E-mail">
+		</div>
+		<div class="form-group">
+			<label class="sr-only" for="exampleInputPassword3">Password</label> <input
+				type="password" name="user.password" class="form-control"
+				placeholder="Senha">
+		</div>
+		<button type="submit" class="btn"
+			style="width: 90px; border: 1px solid #fff;">Entrar</button>
+	</form>
+	<hr size="1" style="border: 1px solid #DBDBDB;" />
 
-<div class="WelcomeB">
-   <dl>
-    <dt>Compartilhe oque gosta</dt>
-    <dd>compartilhe com todos seus amigos fotos, videos e musicas.</dd>
-  </dl>
-  <dl>
-    <dt>Conheça novas pessoas</dt>
-    <dd>Adicione novas pessoas com os mesmos interesses e gostos.</dd>
-  </dl>
-  <dl>
-    <dt>Faça tudo isso com segurança</dt>
-    <dd>garantimos que todos seus dados e mensagens sejam protegidos etc.</dd>
-  </dl>
-</div>
+	<div class="WelcomeB">
+		<dl>
+			<dt>Compartilhe oque gosta</dt>
+			<dd>compartilhe com todos seus amigos fotos, videos e musicas.</dd>
+		</dl>
+		<dl>
+			<dt>Conheça novas pessoas</dt>
+			<dd>Adicione novas pessoas com os mesmos interesses e gostos.</dd>
+		</dl>
+		<dl>
+			<dt>Faça tudo isso com segurança</dt>
+			<dd>garantimos que todos seus dados e mensagens sejam protegidos
+				etc.</dd>
+		</dl>
+	</div>
 
-<form action="<c:url value="/salvar"/>" class="form-horizontal" method="POST">
-<div class="row">
-<div class="col-lg-4 col-lg-offset-7">
-<h2 class="titulo">Cadastre-se</h2>
-<div class="form-group">
-<div class="col-sm-8">	   
-		<input type="text" name="user.name" value="${user.name}" class="form-control" placeholder="Digite seu Nome">
-</div>
-	</div>
-	<div class="form-group">
-	<div class="col-sm-8">
-		<input type="email" name="user.email" class="form-control" placeholder="Digite seu E-mail">
-	</div>
-	</div>
-	<div class="form-group">
-	<div class="col-sm-8">
-		<input type="password" name="user.password" class="form-control" placeholder="Digite sua Senha">
-	</div>
-	</div>
-	<div class="col-sm-">
-	<button type="submit" class="btn" style=".btn:hover{border: 1px solid #222222;}">Cadastre-se</button>
-	</div>
-</div>
-</div>
-</form>
+	<form action="<c:url value="/salvar"/>" class="form-horizontal"
+		method="POST">
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-7">
+				<h2 class="titulo">Cadastre-se</h2>
+				<div class="form-group">
+					<div class="col-sm-8">
+						<input type="text" name="user.name" class="form-control"
+							placeholder="Digite seu Nome">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8">
+						<input type="email" name="user.email" class="form-control"
+							placeholder="Digite seu E-mail">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8">
+						<input type="password" name="user.password" class="form-control"
+							placeholder="Digite sua Senha">
+					</div>
+				</div>
+				<div class="col-sm-">
+					<button type="submit" class="btn"
+						style="btn: hover{border: 1px solid #222222;">Cadastre-se</button>
+				</div>
+			</div>
+		</div>
+	</form>
 
 </body>
 </html>

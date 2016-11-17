@@ -48,6 +48,7 @@ public class IndexController {
 		Long id_user = session.getId();
 		user.setId(id_user);
 		dao.updateUser(user);
+		result.include("updateSucess", "Dados alterados com sucesso!");
 		result.redirectTo(IndexController.class).home();
 
 	}
@@ -88,8 +89,8 @@ public class IndexController {
 	private List<TwitterVO> listaVO(){
 		UserDao dao = new UserDao();
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		Long id_user = session.getId();
-		List<TwitterVO> listaVo = (List<TwitterVO>) dao.listaVO(id_user);
+		User u = session.getUser();
+		List<TwitterVO> listaVo = (List<TwitterVO>) dao.listaVO(u);
 		for (int i = 0; i<listaVo.size(); i++) {
 			TwitterVO t = listaVo.get(i); // pega o twit da posisao i
 			String a = dataFormatada.format(t.getData().getTime()); //converte a data no formato predefinido
