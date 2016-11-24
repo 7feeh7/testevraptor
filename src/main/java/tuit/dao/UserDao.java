@@ -1,5 +1,7 @@
 package tuit.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -150,8 +152,10 @@ public class UserDao {
 		
 	}
 
-	public List<TwitterVO> listaVO(User u) throws HibernateException{
-		List<TwitterVO> listaVO = new ArrayList<>();
+	public Set<TwitterVO> listaVO(User u) throws HibernateException{
+		Session session = UserDao.getSessionFactory().openSession();
+		Criteria criteria = session.createCriteria(Twit.class);
+		Set<TwitterVO> listaVO = new HashSet<>();
 
 		List<User> listaSeguindo = listaSeguindo(u.getId());
 		List<User> listaUsuarios = listaUser();
@@ -164,8 +168,10 @@ public class UserDao {
 
 			}
 			
-			for (int i = 0; i < listaSeguindo.size(); i++) {
-				for (int j = 0; j < listaTodos.size(); j++) {	
+			for (int j = 0; j < listaTodos.size(); j++) {
+				boolean add = true;
+				
+				for (int i = 0; i < listaSeguindo.size(); i++) {
 					if(listaSeguindo.get(i).getId() == listaTodos.get(j).getId()) {
 						TwitterVO t = new TwitterVO();
 						t.setId_user(listaSeguindo.get(i).getId());
@@ -173,29 +179,42 @@ public class UserDao {
 						t.setTwit(listaTodos.get(j).getTwit());
 						t.setData(listaTodos.get(j).getData());
 						listaVO.add(t);
+					} else 
+						if(u.getId() == listaTodos.get(j).getId()){
+							TwitterVO t = new TwitterVO();
+							t.setId_user(u.getId());
+							t.setName(u.getName());
+							t.setTwit(listaTodos.get(j).getTwit());
+							t.setData(listaTodos.get(j).getData());
+							
+							if (add) {
+								listaVO.add(t);
+								add = false;
+							}
+						}
 					}
 				}
-			}
 		}
 
 
 			//for (int i = 0; i < listaUsuarios.size(); i++) {
-				for (int j = 0; j < listaTodos.size(); j++) {
-					if (u.getId() == listaTodos.get(j).getId()) {
-						TwitterVO t = new TwitterVO();
-						t.setId_user(u.getId());
-						t.setName(u.getName());
-						t.setTwit(listaTodos.get(j).getTwit());
-						t.setData(listaTodos.get(j).getData());
-						listaVO.add(t);
-					}
-				}
+//				for (int j = 0; j < listaTodos.size(); j++) {
+//					if (u.getId() == listaTodos.get(j).getId()) {
+//						TwitterVO t = new TwitterVO();
+//						t.setId_user(u.getId());
+//						t.setName(u.getName());
+//						t.setTwit(listaTodos.get(j).getTwit());
+//						t.setData(listaTodos.get(j).getData());
+//						listaVO.add(t);
+//					}
+//				}
 			//}
 
 
 	
 	return listaVO;			
 }
+	
 	
 	public void logout(User user){
 		session.close();

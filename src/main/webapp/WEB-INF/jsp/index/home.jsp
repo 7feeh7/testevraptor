@@ -35,10 +35,10 @@
 </head>
 <body>
 	<%@ include file="../../../header.jsp"%>
-		<div class="alert alert-danger"
+	<div class="alert alert-danger"
 		style="height: relative; width: 370px; position: absolute; right: 10px; margin-top: -15px; background: #fff; border: 1px solid rgb(225, 232, 237); color: black;">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		 ${etsteasdadas}
+		${etsteasdadas}
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-body">
@@ -49,15 +49,15 @@
 						<form action="<c:url value="/publicar"/>" method="POST"
 							class="form">
 							<textarea id="textarea"
-								style="width: 545px; height: 120px; right: 10px; resize: none; border: 1px #ddd solid;"
+								style="width: 545px; height: 120px; resize: none; border: 1px #ddd solid;"
 								name="twit.twit" placeholder="Oque você esta pensando?"
-								onKeyDown="limite_textarea(this.value)" maxlength="140"></textarea>
-							</br> <input class="btnS" type="submit" style="right: 60px;"
+								onKeyDown="limite_textarea(this.value)" maxlength="140" required>
+							</textarea>
+							<br /> <input class="btnS" type="submit" style="right: 60px;"
 								value="Publicar"> <span id="cont"
-								style="text-align: right;">140</span>
+								style="text-align:right;">140</span>
 						</form>
 					</div>
-
 				</div>
 			</div>
 
@@ -69,11 +69,10 @@
 							<p style="color: rgb(136, 153, 166); text-align: right;">${twit.dataformat}</p>
 							<p>${twit.twit}</p>
 							<div class="stream-item-footer">
-								<hr size="1"
-									style="border: 1px solid rgb(225, 232, 237); border-radius: 4px;" />
+								<hr size="1" style="border: 1px solid rgb(225, 232, 237); border-radius: 4px;" />
 								<p>
-									<a href="#" class="glyphicon glyphicon-thumbs-up"></a>
-									<a href="#" class="glyphicon glyphicon-comment" style="left:5%;" role="button"></a>
+									<a href="#" class="glyphicon glyphicon-thumbs-up"></a> 
+									<a href="#" class="glyphicon glyphicon-comment" style="left: 5%;" role="button"></a>
 								</p>
 							</div>
 						</div>

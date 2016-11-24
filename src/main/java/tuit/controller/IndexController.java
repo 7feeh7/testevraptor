@@ -4,7 +4,10 @@ package tuit.controller;
  */
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -48,6 +51,7 @@ public class IndexController {
 		Long id_user = session.getId();
 		user.setId(id_user);
 		dao.updateUser(user);
+		session.login(user);
 		result.include("updateSucess", "Dados alterados com sucesso!");
 		result.redirectTo(IndexController.class).home();
 
@@ -90,13 +94,26 @@ public class IndexController {
 		UserDao dao = new UserDao();
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		User u = session.getUser();
-		List<TwitterVO> listaVo = (List<TwitterVO>) dao.listaVO(u);
-		for (int i = 0; i<listaVo.size(); i++) {
-			TwitterVO t = listaVo.get(i); // pega o twit da posisao i
-			String a = dataFormatada.format(t.getData().getTime()); //converte a data no formato predefinido
-			listaVo.get(i).setDataformat(a); // atualiza o valor da data formatada em uma variavel nao armazenada
+
+		Set<TwitterVO> listaVo = (Set<TwitterVO>) dao.listaVO(u);
+		Iterator<TwitterVO> itarator = listaVo.iterator();
+		
+		List<TwitterVO> listVO = new ArrayList<>();
+		
+		while (itarator.hasNext()) {
+			
+			TwitterVO t = (TwitterVO) itarator.next(); // pega o twit da posisao i
+			listVO.add(t);
 		}
-		return listaVo;
+			
+		
+		for (int i = 0; i < listVO.size(); i++) {
+			TwitterVO t = listVO.get(i);
+			String a = dataFormatada.format(t.getData().getTime()); //converte a data no formato predefinido
+			listVO.get(i).setDataformat(a); // atualiza o valor da data formatada em uma variavel nao armazenada
+		}
+
+		return listVO;
 	}
 	
 	private List<User> listaUser() {

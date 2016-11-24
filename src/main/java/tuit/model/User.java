@@ -4,6 +4,7 @@ package tuit.model;
  */
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +32,13 @@ public class User implements Serializable{
 	private String email;
     @Column
 	private String  password;
-	
+    @Column
+    private String fone;
+    @Column 
+    private String data_nasc;
+    @Column
+    private byte[] foto_perfil;
+
 	public Long getId() {
 		return id;
 	}
@@ -56,18 +63,29 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getFone() {
+		return fone;
+	}
+	public void setFone(String fone) {
+		this.fone = fone;
+	}
+	public String getData_nasc() {
+		return data_nasc;
+	}
+	public void setData_nasc(String data_nasc) {
+		this.data_nasc = data_nasc;
+	}
+	public byte[] getFoto_perfil() {
+		return foto_perfil;
+	}
+	public void setFoto_perfil(byte[] foto_perfil) {
+		this.foto_perfil = foto_perfil;
+	}
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", fone=" + fone
+				+ ", data_nasc=" + data_nasc + ", foto_perfil=" + Arrays.toString(foto_perfil) + "]";
+	}    
 	
 }
