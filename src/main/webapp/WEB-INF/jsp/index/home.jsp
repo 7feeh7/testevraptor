@@ -62,12 +62,12 @@
 			</div>
 
 			<div class="row">
-				<c:forEach items="${teste}" var="twit">
+				<c:forEach items="${teste}" var="t">
 					<div class="thumbnail">
 						<div class="caption">
-							<h4>${twit.name}</h4>
-							<p style="color: rgb(136, 153, 166); text-align: right;">${twit.dataformat}</p>
-							<p>${twit.twit}</p>
+							<h4>${t.user.name}</h4>
+							<p style="color: rgb(136, 153, 166); text-align: right;">${t.twit.dataformat}</p>
+							<p>${t.twit.twit}</p>
 							<div class="stream-item-footer">
 								<hr size="1" style="border: 1px solid rgb(225, 232, 237); border-radius: 4px;" />
 								<p>

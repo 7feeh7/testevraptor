@@ -27,13 +27,13 @@
 <div class="panel panel-default">
   <div class="panel-body" style="border:1px solid rgb(225, 232, 237);border-radius: 4px;">
 
-	<table class="table table-condensed">
-	  <h3 style="size: 14px;">Talvez voçê conheça</h3>
+	<table class="table table-hover">
+	  <h4 class="text-center">Talvez Você conheça.</h4>
 	  	<tbody>
 	  	<c:forEach items="${listaUser}" var="user">
 			<tr style="">
 				<td>${user.name}</td>
-				<td><a href="seguir?id=${user.id}">Seguir</a></td>				
+				<td><a href="seguir?id=${user.id}" style="text-decoration:none;">Seguir</a></td>				
 			</tr>
 		</c:forEach>
 		</tbody>

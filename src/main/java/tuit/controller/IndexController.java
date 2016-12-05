@@ -23,19 +23,22 @@ import tuit.model.UserSession;
 
 @Controller
 public class IndexController {
-	
-	@Inject private Result result;
-	@Inject private UserSession session;
-	
+
+	@Inject
+	private Result result;
+	@Inject
+	private UserSession session;
+
 	@Path("/")
-	public void index(){
+	public void index() {
 		result.include("", "Você não esta conectado!");
 	}
+
 	@Path("/alterar")
-	public void alterar(){
+	public void alterar() {
 
 	}
-	
+
 	@Path("/salvar")
 	public void Salvar(User user) {
 		UserDao dao = new UserDao();
@@ -67,7 +70,7 @@ public class IndexController {
 		dao.seguir(seguir);
 		result.redirectTo(IndexController.class).home();
 	}
-	
+
 	@Path("/publicar")
 	public void publicar(Twit twit) {
 		UserDao dao = new UserDao();
@@ -95,31 +98,31 @@ public class IndexController {
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		User u = session.getUser();
 
-		Set<TwitterVO> listaVo = (Set<TwitterVO>) dao.listaVO(u);
-		Iterator<TwitterVO> itarator = listaVo.iterator();
+		List<TwitterVO> listaVo = (List<TwitterVO>) dao.listaVO(u.getId());
 		
-		List<TwitterVO> listVO = new ArrayList<>();
 		
-		while (itarator.hasNext()) {
-			
-			TwitterVO t = (TwitterVO) itarator.next(); // pega o twit da posisao i
-			listVO.add(t);
-		}
-			
 		
-		for (int i = 0; i < listVO.size(); i++) {
-			TwitterVO t = listVO.get(i);
-			String a = dataFormatada.format(t.getData().getTime()); //converte a data no formato predefinido
-			listVO.get(i).setDataformat(a); // atualiza o valor da data formatada em uma variavel nao armazenada
+		for (int i = 0; i < listaVo.size(); i++) {
+			TwitterVO t = listaVo.get(i);
+			String a = dataFormatada.format(t.getTwit().getData().getTime()); //converte a data no formato predefinido
+			listaVo.get(i).getTwit().setDataformat(a); // atualiza o valor da data formatada em uma variavel nao armazenada
 		}
 
-		return listVO;
+		return listaVo;
+	}
+	
+	private List<User> listaAllUser() {
+		UserDao dao = new UserDao();
+		List<User> listauser = dao.listaAllUser();
+		return listauser;
 	}
 	
 	private List<User> listaUser() {
 		UserDao dao = new UserDao();
-		List<User> listauser = dao.listaUser();
-		return listauser;
+		Long id_user = session.getId();
+		List<User> lista = dao.listaUser(id_user);
+		return lista;
+
 	}
 	
 	private List<User> listaSeguindo() {
@@ -145,22 +148,21 @@ public class IndexController {
 	}
 	
 	@Path("index")
-	public void logout(){
+	public void logout() {
 		result.include("warningedesk", "Você não esta conectado!");
 		result.redirectTo(IndexController.class).index();
 	}
-	
+
 	@Path("home")
 	public void home() {
 		result.include("publicacao", listaTwit());
-		result.include("listaUser", listaUser());
 		result.include("listaSeguindo", listaSeguindo());
 		result.include("teste", listaVO());
-
 	}
+
 	@Path("list")
-	public void list(){
-		result.include("listaUser", listaUser());	
+	public void list() {
+		result.include("listaUser", listaUser());
 
 	}
 
